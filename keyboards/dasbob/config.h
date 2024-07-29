@@ -24,4 +24,4 @@
 
 #define STARTUP_SOUND E__NOTE(_E6), E__NOTE(_A6), ED_NOTE(_E7),
 
-#define NOKIA_TUNE E__NOTE(_E6), E__NOTE(_D6), Q__NOTE(_FS5), Q__NOTE(_GS5), E__NOTE(_CS6), E__NOTE(_B5), Q__NOTE(_D5), Q__NOTE(_E5), E__NOTE(_B5), E__NOTE(_A5), Q__NOTE(_CS5), Q__NOTE(_E5), HD_NOTE(_A5),
+#define NOKIA_TUNE E__NOTE(_B5), E__NOTE(_A5), Q__NOTE(_CS5), Q__NOTE(_E5), HD_NOTE(_A5),
