@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include QMK_KEYBOARD_H
+#include "animation.c"
 
 enum layers {
     _ALPHA_QWERTY = 0,
@@ -44,7 +45,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // clang-format on
 };
 
-oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_270; }
+oled_rotation_t oled_init_user(oled_rotation_t rotation) { 
+       if (!is_keyboard_master()) {
+        return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
+    }
+    return OLED_ROTATION_270; 
+}
+
+
+void render_animation(uint8_t frame) {
+    if (last_input_activity_elapsed() > OLED_TIMEOUT) {
+        oled_off();
+        return;
+    }
+    oled_write_raw_P(animation[frame], sizeof(animation[frame]));
+}
 
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
@@ -52,10 +67,7 @@ bool oled_task_user(void) {
        render_mod_status();
     }
     else {
-        static const char PROGMEM dasbob_logo[] = {
-            // Your dasbob_logo data here
-        };
-        oled_write_raw_P(dasbob_logo, sizeof(dasbob_logo));
+        render_animation((timer_read() / 60) % 10);
     }
     return false;
 }
