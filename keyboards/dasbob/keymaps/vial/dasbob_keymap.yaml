@@ -1,0 +1,89 @@
+layout: {qmk_keyboard: 3w6/rev2, qmk_layout: LAYOUT
+}
+layers:
+  BASE:
+  - [Q, W, E, R, T, Y, U, I, O, P]
+  - {t: A, h: Meta}
+  - {t: S, h: Alt}
+  - {t: D, h: Ctrl}
+  - {t: F, h: Shift}
+  - G
+  - H
+  - {t: J, h: Shift}
+  - {t: K, h: Ctrl}
+  - {t: L, h: Alt}
+  - {t: ;, h: RGUI}
+  - [Z, X, C, V, B, N, M, ',', ., /]
+  - {h: NUM, t: Esc}
+  - {h: FUN, t: Space}
+  - {h: NAV, t: Tab}
+  - {h: SYM, t: BSpace}
+  - {t: Enter, h: Shift}
+  - {t: Del, h: Alt}
+  NAV:
+  - [Mouse WH Up, Mouse LClick, Mouse Up, Mouse RClick, Mouse WH UP, Ins, Pgdn, Up, Pgup, Del]
+  - [Mouse WH Down, Mouse Left, Mouse Down, Mouse Right, Mouse WH Down, Home, Left, Down, Right, End]
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - {t: Z, h: Ctrl}
+  - {t: Del, h: Shift}
+  - {t: Ins, h: Ctrl}
+  - {t: Ins, h: Shift}
+  - {t: Y, h: Ctrl}
+  - {h: NUM, t: Esc}
+  - {h: FUN, t: Space}
+  - {type: held}
+  - {h: SYM, t: BSpace}
+  - {t: Enter, h: Shift}
+  - {t: Del, h: Alt}
+  SYM:
+  - ['!', '@', '#', $, '%', '&', /, (, ), '=']
+  - ['~', '''', '', '', '', '*', +, '[', ']', '?']
+  - ['|', <, '>', '%', '', -, _, '{', '}', '']
+  - {h: NUM, t: Esc}
+  - {h: FUN, t: Space}
+  - {h: NAV, t: Tab}
+  - {type: held}
+  - {t: Enter, h: Shift}
+  - {t: Del, h: Alt}
+  NUM:
+  - ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+  - ["*", "-", ".", /, +, Num Lock, '', '', '', $$mdi:calculator-variant$$]
+  - "="
+  - ''
+  - ''
+  - ''
+  - Enter
+  - {t: Z, h: Ctrl}
+  - {t: Del, h: Shift}
+  - {t: Ins, h: Ctrl}
+  - {t: Ins, h: Shift}
+  - {t: Y, h: Ctrl}
+  - {type: held}
+  - {h: FUN, t: Space}
+  - {h: NAV, t: Tab}
+  - {h: SYM, t: BSpace}
+  - {t: Enter, h: Shift}
+  - {t: Del, h: Alt}
+  FUN:
+  - [F1, F2, F3, F4, F5, $$mdi:volume-minus$$, $$mdi:volume-mute$$, $$mdi:volume-plus$$,  $$mdi:knob$$, $$mdi:power-sleep$$]
+  - [F6, F7, F8, F9, F10, $$mdi:skip-previous$$, $$mdi:play-pause$$, $$mdi:stop$$, $$mdi:skip-next$$, $$mdi:power$$]
+  - F11
+  - F12
+  - ''
+  - ''
+  - ''
+  - $$mdi:brightness-7$$
+  - $$mdi:brightness-5$$
+  - $$mdi:magnify$$
+  - $$mdi:dock-window$$
+  - $$mdi:monitor-screenshot$$
+  - {h: NUM, t: Esc}
+  - {type: held}
+  - {h: NAV, t: Tab}
+  - {h: SYM, t: BSpace}
+  - {t: Enter, h: Shift}
+  - {t: Del, h: Alt}

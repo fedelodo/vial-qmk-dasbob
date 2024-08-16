@@ -26,11 +26,11 @@ enum layers {
 #define HOME_L LALT_T(KC_L)
 #define HOME_SCLN RGUI_T(KC_SCLN)
 
-#define REDO LCTL_T(KC_Y)
-#define PASTE LSFT_T(KC_INS)
-#define COPY LCTL_T(KC_INS)
-#define CUT LSFT_T(KC_DEL)
-#define UNDO LCTL_T(KC_Z)
+#define REDO LCTL(KC_Y)
+#define PASTE LSFT(KC_INS)
+#define COPY LCTL(KC_INS)
+#define CUT LSFT(KC_DEL)
+#define UNDO LCTL(KC_Z)
 
 #define SWC_WIN LALT(KC_TAB)
 #define SEARCH LGUI(KC_SPC)	
@@ -58,8 +58,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_SYM] = LAYOUT_split_3x5_3(
         KC_EXLM, KC_AT,   KC_HASH, KC_DOLLAR, KC_PERCENT,                                             KC_AMPR, KC_SLSH, KC_LPRN, KC_RPRN, KC_EQL,
-        KC_TILD, KC_QUOT, XXXXXXX , XXXXXXX,  XXXXXXX,                                                KC_ASTR, KC_PLUS, KC_LBRC, KC_RBRC, KC_QUES,
-        KC_PIPE, KC_LT,   KC_GT,   KC_PERC,   XXXXXXX,                                                KC_PMNS, KC_UNDS, KC_LCBR, KC_RCBR, XXXXXXX,
+        KC_TILD, KC_QUOT, KC_GRAVE , XXXXXXX,  XXXXXXX,                                                KC_ASTR, KC_PLUS, KC_LBRC, KC_RBRC, KC_QUES,
+        KC_PIPE, KC_LT,   KC_GT,   XXXXXXX,   XXXXXXX,                                                KC_PMNS, KC_UNDS, KC_LCBR, KC_RCBR, XXXXXXX,
                         LT(_NUM, KC_ESC), LT(_FUN, KC_SPC), LT(_NAV, KC_TAB),     LT(_SYM, KC_BSPC), LSFT_T(KC_ENT), LALT_T(KC_DEL)
     ),
     [_NUM] = LAYOUT_split_3x5_3(
@@ -78,9 +78,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { 
-       if (!is_keyboard_master()) {
-        return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
-    }
     return OLED_ROTATION_270; 
 }
 
@@ -94,12 +91,24 @@ void render_animation(uint8_t frame) {
 }
 
 bool oled_task_user(void) {
-    if (is_keyboard_master()) {
-       extern void render_mod_status(void);
-       render_mod_status();
+    if (last_input_activity_elapsed() > OLED_TIMEOUT) {
+        oled_off();
+        return false;
+    }
+    if (get_highest_layer(layer_state|default_layer_state) == 0){
+            if (is_keyboard_master()) {
+            extern void render_mod_status(void);
+            render_mod_status();
+            }
+            else {
+                 if (get_highest_layer(layer_state|default_layer_state) == 0){
+                render_animation((timer_read() / 60) % 10);
+            }
+            }
     }
     else {
-        render_animation((timer_read() / 60) % 10);
+        extern void render_layer_map(uint8_t const state);
+        render_layer_map(get_highest_layer(layer_state|default_layer_state));
     }
     return false;
 }
